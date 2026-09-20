@@ -48,7 +48,7 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          PSGALLERY_API_KEY: op://DevOps/PowerShell Gallery/api key
+          PSGALLERY_API_KEY: op://Github Actions/PSGallery Push Token PSMacOS/Anmeldedaten
 
       - name: Publish module to PowerShell Gallery
         shell: pwsh
