@@ -1,0 +1,57 @@
+name: PowerShell - Release
+
+on:
+  release:
+    types: [ 'published' ]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pwsh-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Publish to PowerShell Gallery
+    runs-on: macos-latest
+    env:
+      ModuleName: PSmacOS
+    steps:
+
+      - name: Check out repository code
+        uses: actions/checkout@v5
+
+      - name: Install and cache PowerShell modules
+        uses: potatoqualitee/psmodulecache@v6.3
+        with:
+          modules-to-cache: InvokeBuild:5.14.23,PSScriptAnalyzer:1.24.0,Pester:6.0.0
+
+      - name: Build PowerShell module
+        shell: pwsh
+        run: |
+          Invoke-Build -Task 'Build'
+
+      - name: Test PowerShell module
+        shell: pwsh
+        run: |
+          Invoke-Build -Task 'Test'
+
+      # Reads the PSGALLERY_API_KEY secret reference below (op://<vault>/<item>/<field>)
+      # from 1Password and exports it as an environment variable for the next step.
+      # Requires the OP_SERVICE_ACCOUNT_TOKEN repository secret to be configured with
+      # a 1Password Service Account token that has read access to that item.
+      - name: Load PowerShell Gallery API key from 1Password
+        uses: 1password/load-secrets-action@v2
+        with:
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          PSGALLERY_API_KEY: op://DevOps/PowerShell Gallery/api key
+
+      - name: Publish module to PowerShell Gallery
+        shell: pwsh
+        run: |
+          $env:PSModulePath = "$PWD{0}$env:PSModulePath" -f [System.IO.Path]::PathSeparator
+          Publish-Module -Name $env:ModuleName -NuGetApiKey $env:PSGALLERY_API_KEY -Repository PSGallery

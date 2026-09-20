@@ -76,6 +76,8 @@
         'Get-MacInternetAccount'
         # Update
         'Install-MacSoftwareUpdate'
+        # GridView
+        'Out-MacGridView'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -102,13 +104,13 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags = @('PSModule', 'macOS', 'Hostname', 'scutil', 'Network', 'Application', 'Bluetooth', 'InternetAccounts', 'SoftwareUpdate')
+            Tags = @('PSModule', 'macOS', 'Hostname', 'scutil', 'Network', 'Application', 'Bluetooth', 'InternetAccounts', 'SoftwareUpdate', 'GridView')
 
             # A URL to the license for this module.
-            LicenseUri = 'https://raw.githubusercontent.com/flaviowaser/PSmacOS/main/LICENSE'
+            LicenseUri = 'https://raw.githubusercontent.com/flawas/PSMacOS/main/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri = 'https://github.com/flaviowaser/PSmacOS'
+            ProjectUri = 'https://github.com/flawas/PSMacOS'
 
             # A URL to an icon representing this module.
             # IconUri = ''

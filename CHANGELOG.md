@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Added: New function to get paired Bluetooth devices (Get-MacBluetoothDevice)
 * Added: New function to get configured internet accounts, e.g. iCloud or Google (Get-MacInternetAccount)
 * Added: New function to install pending macOS software updates (Install-MacSoftwareUpdate)
+* Added: New function to send pipeline output to an interactive, searchable list window, similar to the Windows PowerShell Out-GridView cmdlet (Out-MacGridView)
 
 ## 1.0.0 - 2026-09-16
 

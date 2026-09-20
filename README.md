@@ -1,5 +1,5 @@
-[![GitHub Release](https://img.shields.io/github/v/release/flaviowaser/PSmacOS?label=Release&logo=GitHub&sort=semver)](https://github.com/flaviowaser/PSmacOS/releases)
-[![GitHub CI Build](https://img.shields.io/github/actions/workflow/status/flaviowaser/PSmacOS/pwsh-ci.yml?label=CI%20Build&logo=GitHub)](https://github.com/flaviowaser/PSmacOS/actions/workflows/pwsh-ci.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/flawas/PSMacOS?label=Release&logo=GitHub&sort=semver)](https://github.com/flawas/PSMacOS/releases)
+[![GitHub CI Build](https://img.shields.io/github/actions/workflow/status/flawas/PSMacOS/pwsh-ci.yml?label=CI%20Build&logo=GitHub)](https://github.com/flawas/PSMacOS/actions/workflows/pwsh-ci.yml)
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/PSmacOS?label=PowerShell%20Gallery&logo=PowerShell)](https://www.powershellgallery.com/packages/PSmacOS)
 [![Gallery Downloads](https://img.shields.io/powershellgallery/dt/PSmacOS?label=Downloads&logo=PowerShell)](https://www.powershellgallery.com/packages/PSmacOS)
 
@@ -76,6 +76,15 @@ valid Bonjour name for the LocalHostName and HostName), or individually.
   updates by label. Requires an elevated (root) session, e.g. PowerShell
   started with `sudo`.
 
+### GridView
+
+* **Out-MacGridView**
+  Send pipeline output to an interactive, searchable list window (a native
+  macOS "choose from list" dialog), similar in spirit to the Windows
+  PowerShell `Out-GridView` cmdlet. Use `-PassThru` or `-OutputMode Single`
+  / `Multiple` to return the row(s) selected by the user back to the
+  pipeline.
+
 ## Versions
 
 Please find all versions in the [GitHub Releases] section and the release
@@ -132,6 +141,12 @@ sudo pwsh -Command "Install-MacSoftwareUpdate"
 
 # Install a specific software update and restart if required
 sudo pwsh -Command "Install-MacSoftwareUpdate -Name 'macOSSonomaUpdate-14.5' -RestartIfNeeded"
+
+# Show installed applications in a searchable list window
+Get-MacApplication | Out-MacGridView -Title 'Applications'
+
+# Show Bluetooth devices and return the one(s) selected by the user
+Get-MacBluetoothDevice | Out-MacGridView -PassThru
 ```
 
 ## Requirements
@@ -153,7 +168,7 @@ in Visual Studio Code and ensure that the PowerShell extension is installed.
 * [Pester], [PSScriptAnalyzer] and [InvokeBuild] modules
 
 [PowerShell Gallery]: https://www.powershellgallery.com/packages/PSmacOS
-[GitHub Releases]: https://github.com/flaviowaser/PSmacOS/releases
+[GitHub Releases]: https://github.com/flawas/PSMacOS/releases
 [Installing a PowerShell Module]: https://learn.microsoft.com/en-us/powershell/scripting/developer/module/installing-a-powershell-module
 
 [CHANGELOG.md]: CHANGELOG.md
